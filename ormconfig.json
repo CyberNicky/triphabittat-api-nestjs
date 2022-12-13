@@ -1,0 +1,7 @@
+
+{
+    "database": "./db-sql",
+    "type": "mysql",
+    "synchronize": true,
+    "entities": ["dist/**/*.model.js"]
+}
