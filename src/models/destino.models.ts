@@ -1,14 +1,15 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
 @Entity()
-export class PersonModel {
+export class DestinoModel {
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column({ length: 120})    
     name: string;
-    @Column({length: 255})    
-    email: string;
+
     @Column()    
-    password: string;
-    
+    descricao: string;
+
+    @Column()    
+    img_url: string;    
 }

@@ -11,16 +11,15 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PersonModel } from 'src/models/person.model';
-import { PersonModule } from 'src/modules/person.modules';
 import { PersonSchema } from 'src/schema/person.schema';
 import { Repository } from 'typeorm';
 
-@Controller('/person')
+@Controller('user')
 export class PersonController {
   constructor(
     @InjectRepository(PersonModel) private model: Repository<PersonModel>,
   ) {}
-  @Post()
+  @Post('register')
   public async create(
     @Body() body: PersonSchema,
   ): Promise<PersonModel> {
