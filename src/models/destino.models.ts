@@ -1,7 +1,7 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AvaliacaoModel } from "./avaliacao.models";
 @Entity()
-export class DestinoModel {
+export class DestinoModel extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
 

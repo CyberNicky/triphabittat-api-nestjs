@@ -13,9 +13,7 @@ export class AvaliacaoModel {
     @Column({name: 'id_destino'})    
     idDestino: string;
 
-    @Column()    
-    id_user: string;
-    
+    // id_user
     @OneToOne(() => PersonModel)
     @JoinColumn({name: "id"})
     profile: PersonModel
