@@ -20,7 +20,7 @@ export class DestinoController {
     @InjectRepository(DestinoModel) private model: Repository<DestinoModel>,
     
   ) {}
-  @Post()
+  @Post('register')
   public async create(
     @Body() body: DestinoSchema,
   ): Promise<DestinoModel> {
@@ -46,7 +46,7 @@ export class DestinoController {
     ): Promise<DestinoModel> {
     const destino = await this.model.findOne({ where: { id }});
     if (!destino){
-        throw new NotFoundException(`Não achei uma pessoa com ID solicitado. ${id}`);
+        throw new NotFoundException(`Não achei um destino com ID solicitado. ${id}`);
     }
     await this.model.update({id}, body);
     return await this.model.findOne({ where: { id } });
