@@ -23,17 +23,19 @@ export class AvaliacaoController {
   ) {}
   @Post()
   public async create(@Body() body: AvaliacaoSchema): Promise<AvaliacaoModel> {
-    const userExists = await PersonModel.findOneBy({id:  body.id_user});
+    
+
+    const userExists = await PersonModel.findOneBy({id:  body.idUser});
     if (!userExists) {
       throw new NotFoundException(
-        `Não achei um usuário com ID solicitado. ${body.id_user}`,
+        `Não achei um usuário com ID solicitado. ${body.idUser}`,
       );
     }
     
-    const destinoExists = await DestinoModel.findOneBy({id: body.id_destino})
+    const destinoExists = await DestinoModel.findOneBy({id: body.idDestino})
     if (!destinoExists){
       throw new NotFoundException(
-        `Não achei um destino com ID solicitado. ${body.id_destino}`,
+        `Não achei um destino com ID solicitado. ${body.idDestino}`,
       );
     }
     // validar se o conteudo da avaliação tem um tamanho mínimo de caracteres
@@ -44,7 +46,13 @@ export class AvaliacaoController {
     );
   }
 
-    return this.model.save(body);
+    const avaliacaoData = {
+      conteudo: body.conteudo,
+      id_destino: body.idDestino,
+      id_user: body.idUser
+    }
+
+    return this.model.save(avaliacaoData);
   }
 
   @Get(':id')
@@ -72,7 +80,13 @@ export class AvaliacaoController {
         `Não achei uma avaliação com ID solicitado. ${id}`,
       );
     }
-    await this.model.update({ id }, body);
+    const avaliacaoData = {
+      conteudo: body.conteudo,
+      id_destino: body.idDestino,
+      id_user: body.idUser
+    }
+    
+    await this.model.update({ id }, avaliacaoData);
     return await this.model.findOne({ where: { id } });
   }
   @Delete(':id')

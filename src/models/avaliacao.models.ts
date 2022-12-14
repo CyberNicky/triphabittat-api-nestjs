@@ -12,10 +12,13 @@ export class AvaliacaoModel {
 
     @Column({name: 'id_destino'})    
     idDestino: string;
+    
+    @Column({name: 'id_user'})
+    idUser: string;
 
     // id_user
     @OneToOne(() => PersonModel)
-    @JoinColumn({name: "id"})
+    @JoinColumn({name: "id_user"})
     profile: PersonModel
 
     @ManyToOne(() => DestinoModel, (destino) => destino.avaliacoes)

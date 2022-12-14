@@ -1,12 +1,12 @@
 import { IsString, MaxLength} from 'class-validator';
 import { BaseEntity } from 'typeorm';
 import { PersonSchema } from './person.schema';
-export class AvaliacaoSchema extends BaseEntity {
+export class AvaliacaoSchema  {
     @IsString()
-    @MaxLength(120)
+    @MaxLength(255)
     conteudo: string;
     
-    id_destino: number;
+    idDestino: number;
 
-    id_user: number;
+    idUser: number;
 }

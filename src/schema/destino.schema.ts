@@ -1,7 +1,7 @@
 import { IsString, MaxLength, IsBase64 } from 'class-validator';
 export class DestinoSchema {
     @IsString()
-    @MaxLength(120)
+    @MaxLength(255)
     name: string;
     
     @IsString()

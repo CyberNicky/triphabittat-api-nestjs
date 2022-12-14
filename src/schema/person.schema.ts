@@ -1,7 +1,7 @@
 import { IsString, MaxLength, IsEmail } from 'class-validator';
 export class PersonSchema {
     @IsString()
-    @MaxLength(120)
+    @MaxLength(255)
     name: string;
     @IsString()
     @MaxLength(255)
