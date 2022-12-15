@@ -13,6 +13,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PersonModel } from 'src/models/person.model';
 import { PersonSchema } from 'src/schema/person.schema';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
+import { Hash } from 'crypto';
+
 
 @Controller('user')
 export class PersonController {
@@ -23,6 +26,7 @@ export class PersonController {
   public async create(
     @Body() body: PersonSchema,
   ): Promise<PersonModel> {
+    body.password = bcrypt.hashSync(body.password, 10)
     return this.model.save(body);
   }
 
