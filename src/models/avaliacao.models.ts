@@ -10,11 +10,11 @@ export class AvaliacaoModel {
     @Column({ length: 255})    
     conteudo: string;
 
-    @Column({name: 'id_destino'})    
-    idDestino: string;
+    @Column({name: 'id_destino', nullable: false, default: null})    
+    idDestino: number;
     
-    @Column({name: 'id_user'})
-    idUser: string;
+    @Column({ name: 'id_user', nullable: false, default: null })
+    idUser: number;
 
     // id_user
     @OneToOne(() => PersonModel)
