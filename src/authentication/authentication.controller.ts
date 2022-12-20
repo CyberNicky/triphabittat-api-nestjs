@@ -24,9 +24,9 @@ export class AuthenticationController {
         where: { id },
         select: ['password'],
       });
-      console.log(user)
+      console.log(user);
       const rightPassword = await bcrypt.compare(password, user.password);
-    //   const rightPassword = password === user.password;
+      //   const rightPassword = password === user.password;
       if (!user || !rightPassword) {
         throw new UnauthorizedException('Estas credenciais estão incorretas.');
       }
@@ -53,19 +53,19 @@ export class AuthenticationController {
     data: {
       email: string;
       password: string;
-      roleId: number;
-      unitId: number;
     },
   ): Promise<{ user: UserInterface; accessToken: string; id: number }> {
     try {
-      const { email, password, roleId, unitId } = data;
-
+      const { email, password } = data;
+      console.log(data);
       const user = await PersonModel.findOne({
         where: {
           email,
         },
       });
 
+      console.log(user);
+      if (!user) return;
       await this.checkUserPassword(user.id, password);
 
       const accessToken = await this.signToken(user);
