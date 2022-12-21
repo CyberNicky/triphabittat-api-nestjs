@@ -20,11 +20,9 @@ import { DestinoModel } from 'src/models/destino.models';
 export class AvaliacaoController {
   constructor(
     @InjectRepository(AvaliacaoModel) private model: Repository<AvaliacaoModel>,
-  ) { }
+  ) {}
   @Post()
   public async create(@Body() body: AvaliacaoSchema): Promise<AvaliacaoModel> {
-
-
     const userExists = await PersonModel.findOneBy({ id: body.idUser });
     if (!userExists) {
       throw new NotFoundException(
@@ -32,7 +30,7 @@ export class AvaliacaoController {
       );
     }
 
-    const destinoExists = await DestinoModel.findOneBy({ id: body.idDestino })
+    const destinoExists = await DestinoModel.findOneBy({ id: body.idDestino });
     if (!destinoExists) {
       throw new NotFoundException(
         `Não achei um destino com ID solicitado. ${body.idDestino}`,
@@ -41,13 +39,10 @@ export class AvaliacaoController {
     // validar se o conteudo da avaliação tem um tamanho mínimo de caracteres
     // desconsiderando os espaços
     if (body.conteudo.replace(/\s/g, '').length < 4) {
-      throw new NotFoundException(
-        `Caracters insuficientes. ${body.conteudo}`,
-      );
+      throw new NotFoundException(`Caracters insuficientes. ${body.conteudo}`);
     }
 
-    console.log(body)
-
+    console.log(body);
 
     return this.model.save(body);
   }
@@ -63,9 +58,11 @@ export class AvaliacaoController {
     return avaliacao;
   }
 
-  @Get(':idDestino')
-  public async getByDestId(@Param('idDestino') idDestino: number): Promise<AvaliacaoModel> {
-    const avaliacao = await this.model.findOne({ where: { idDestino } });
+  @Get('/dest/:idDestino')
+  public async getByDestId(
+    @Param('idDestino') idDestino: number,
+  ): Promise<AvaliacaoModel[]> {
+    const avaliacao = await this.model.find({ where: { idDestino } });
     if (!avaliacao) {
       throw new NotFoundException(
         `Não achei um avaliacao com ID solicitado. ${idDestino}`,
@@ -93,8 +90,8 @@ export class AvaliacaoController {
     const avaliacaoData = {
       conteudo: body.conteudo,
       id_destino: body.idDestino,
-      id_user: body.idUser
-    }
+      id_user: body.idUser,
+    };
 
     await this.model.update({ id }, avaliacaoData);
     return await this.model.findOne({ where: { id } });

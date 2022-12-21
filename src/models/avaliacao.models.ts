@@ -17,7 +17,7 @@ export class AvaliacaoModel {
     idUser: number;
 
     // id_user
-    @OneToOne(() => PersonModel)
+    @ManyToOne(() => PersonModel)
     @JoinColumn({name: "id_user"})
     profile: PersonModel
 

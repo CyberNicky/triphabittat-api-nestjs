@@ -1,19 +1,27 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { AvaliacaoModel } from "./avaliacao.models";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { AvaliacaoModel } from './avaliacao.models';
 @Entity()
-export class DestinoModel extends BaseEntity{
-    @PrimaryGeneratedColumn()
-    id: number;
+export class DestinoModel extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ length: 120})    
-    name: string;
+  @Column({ length: 120 })
+  name: string;
+  @Column({ length: 120 })
+  state: string;
 
-    @Column()    
-    descricao: string;
+  @Column()
+  descricao: string;
 
-    @Column()    
-    img_url: string; 
-    
-    @OneToMany(() => AvaliacaoModel, (avaliacao) => avaliacao.destino)
-    avaliacoes: AvaliacaoModel[]
+  @Column({ name: 'img_url' })
+  imgUrl: string;
+
+  @OneToMany(() => AvaliacaoModel, (avaliacao) => avaliacao.destino)
+  avaliacoes: AvaliacaoModel[];
 }
