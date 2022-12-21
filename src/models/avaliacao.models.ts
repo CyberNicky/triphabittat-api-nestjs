@@ -17,11 +17,15 @@ export class AvaliacaoModel {
     idUser: number;
 
     // id_user
-    @ManyToOne(() => PersonModel)
+    @ManyToOne(() => PersonModel, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn({name: "id_user"})
     profile: PersonModel
 
-    @ManyToOne(() => DestinoModel, (destino) => destino.avaliacoes)
+    @ManyToOne(() => DestinoModel, (destino) => destino.avaliacoes, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn({name: "id_destino"})
     destino: DestinoModel
 }

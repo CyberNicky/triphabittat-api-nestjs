@@ -11,9 +11,9 @@ export class DestinoModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 120 })
+  @Column({ length: 255 })
   name: string;
-  @Column({ length: 120 })
+  @Column({ length: 255 })
   state: string;
 
   @Column()

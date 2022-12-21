@@ -11,7 +11,7 @@ import { AvaliacaoModel } from './avaliacao.models';
 export class PersonModel extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ length: 120 })
+  @Column({ length: 255 })
   name: string;
   @Column({ length: 255 })
   email: string;
